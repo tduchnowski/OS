@@ -1,21 +1,18 @@
-; Move cursor to a specific location on the screen and remember this location
-; Parameters:
-; 	bh = Y coordinate
-; 	bl = X coordinate
-; Return: None
-MovCursor:
+; Prints a yellow string
+; Params:
+; 	cx = number of characters in a string 
+; 	bp = pointer to a string
+print_string:
+	mov al, 1
+	mov bh, 0
+	mov bl, 0eh ; color
+	mov dl, 30 ; row
+	mov dh, 15 ; column
+	;mov cx, msglen
+	push cs
+	pop es
+	;mov bp, msg 
+	mov ah, 13h
+	int 10h
+	ret
 	
-; Print a character on the screen, at the current cursor location
-; Parameters:
-; 	al = character
-; 	bl = text color
-; 	cx = number of times a character will be printed
-; Return: None
-PutChar:
-
-; Print a string
-; Parameters:
-; 	ds:si = zero terminated string
-; Return: None
-Print:
-
