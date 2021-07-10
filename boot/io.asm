@@ -23,7 +23,7 @@ clear_screen:
 
 ; Sleep
 ; Params:
-; 	CX:DX = interval in miliseconds
+; 	CX:DX = interval in microseconds
 sleep:
 	mov al, 0
 	mov ah, 86h
