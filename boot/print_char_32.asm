@@ -1,3 +1,4 @@
+; a little procedure to see if bootloader switches to protected mode
 bits 32
 
 VIDEO_MEMORY equ 0xb8000

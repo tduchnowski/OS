@@ -29,3 +29,22 @@ sleep:
 	mov ah, 86h
 	int 15h
 	ret
+
+; Load disk
+; Params:
+; 	dh = number of sectors needed to be read
+; 	dl = drive
+; Return:
+; 	es:bx = location of the loaded data
+; TODO: handle error (when carry flag is set by the BIOS function)
+load_disk:
+	push dx
+	mov ah, 0x02 ; BIOS read sector function
+	mov al, dh
+	mov ch, 0x0 ; cylinder 0
+	mov dh, 0x0 ; head 0
+	mov cl, 0x02 ; read from second sector
+	int 0x13
+	pop dx
+	ret
+
