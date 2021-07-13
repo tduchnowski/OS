@@ -1,14 +1,17 @@
 #include "screen.h"
+#include "low_level.h"
 
-
+// declarations of inner functions
 int calculate_offset(int,int);
+
+// pointer to VGA memory
+char* vidmem = VIDEO_MEMORY;
 
 /*
  * Prints a string
  * TODO Implement scrolling and behaviour when there is a \n in a string
  */
 void print_string(char* text, int row, int column, char attribute){
-	unsigned char* vidmem = (unsigned char*) VIDEO_MEMORY;
 	if(!attribute){
 		attribute = WHITE_ON_BLACK;
 	}
@@ -27,8 +30,8 @@ void print_string(char* text, int row, int column, char attribute){
 }
 
 /*
-	calculate a place in VGA memory from row and column values
-	row 0, column 0 is the top left corner
+ * calculates a place in VGA memory from row and column values
+ * row 0, column 0 is the top left corner
 */
 int calculate_offset(int row, int column){
 	int offset = 2 * MAX_COLUMNS * row + 2 * column;
@@ -36,11 +39,23 @@ int calculate_offset(int row, int column){
 }
 
 void clear_screen(){
-	unsigned char* vidmem = (unsigned char*) VIDEO_MEMORY;
-	for(int i = 0; i < MAX_OFFSET;i + 2){
+	for(int i = 0; i < MAX_OFFSET; i += 2){
 		vidmem[i] = '\0';
 	}
 }
 
 void scroll_screen(int rows){
+}
+
+/*
+ * Switch the cursor on or off (only disabling is possible right now)
+ * TODO Make switching on possible
+*/
+void set_cursor(char state){
+	if(state){ return;}
+	else{
+		port_byte_out(REG_SCREEN_CTRL, 0x0a);
+		port_byte_out(REG_SCREEN_DATA, 0x20);
+
+	}
 }

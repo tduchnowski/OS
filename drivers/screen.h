@@ -9,4 +9,5 @@
 
 void print_string(char*, int, int, char);
 void scroll_screen(int);
-void clear_screen();
+void clear_screen(void);
+void set_cursor(char);

@@ -22,7 +22,8 @@ run: image
 	qemu-system-i386 -machine q35 -fda image
 
 debug: image
-	qemu-system-i386 -machine q35 -fda image -gdb tcp::26000 -S
+	qemu-system-i386 -machine q35 -fda image -gdb tcp::26000 -S &
+	gdb -q -ex "target remote localhost:26000"
 	
 
 # rule for building each .o from .c
@@ -30,6 +31,7 @@ debug: image
 	i386-elf-gcc -ffreestanding -c $< -o $@ 
 
 clean:
-	rm image
-	rm kernel/*.bin kernel/*.o
-	rm boot/bootloader.bin
+	rm -f image
+	rm -f kernel/*.bin kernel/*.o
+	rm -f drivers/*.o
+	rm -f boot/bootloader.bin
