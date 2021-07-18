@@ -1,9 +1,10 @@
 #include "../drivers/screen.h"
 
-void _start(){
+void _start()
+{
 	clear_screen();
 	set_cursor(0);
-	// check drivers
+	// check screen driver
 	char* welcome_string  = "SCREEN DRIVER WORKS";
 	print_string(welcome_string, 3,0,0);
 }
