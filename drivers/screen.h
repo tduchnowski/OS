@@ -1,3 +1,6 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
 #define VIDEO_MEMORY 0xb8000
 #define MAX_ROWS 25
 #define MAX_COLUMNS 80
@@ -11,3 +14,5 @@ void print_string(char*, int, int, char);
 void scroll_screen(int);
 void clear_screen(void);
 void set_cursor(char);
+
+#endif
